@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'qr_code_generator.wsgi.application'
+WSGI_APPLICATION = 'qr_generator.wsgi.application'
 
 
 # Database
