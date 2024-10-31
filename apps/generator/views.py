@@ -1,7 +1,8 @@
-# qr_generator/apps/generator/views.py
+# # qr_generator/apps/generator/views.py
 
 import qrcode
 from django.http import HttpResponse
+from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
@@ -12,6 +13,10 @@ import io
 
 class QRCodeGenerateView(generics.CreateAPIView):
     serializer_class = QRCodeSerializer
+
+    def get(self, request, *args, **kwargs):
+        # Render the QR code generator template
+        return render(request, 'generator/qr_code_generator.html', {'qr_code': None})
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -46,3 +51,6 @@ class QRCodeGenerateView(generics.CreateAPIView):
         img.save(response, "PNG")
         response['Content-Disposition'] = f'attachment; filename="{original_url.split("/")[-1]}_qrcode.png"'
         return response
+    
+def home(request):
+    return render(request, 'generator/qr_code_generator.html')
