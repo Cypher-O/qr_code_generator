@@ -81,6 +81,7 @@ A full-featured QR Code generator built with Django and Django REST Framework. T
 
 ## Project Structure
 
+```
 qr_code_generator/
 ├── apps/
 │   └── generator/
@@ -107,6 +108,7 @@ qr_code_generator/
 ├── manage.py
 ├── requirements.txt
 └── README.md
+```
 
 ## Development
 
