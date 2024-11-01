@@ -8,3 +8,4 @@ class QRCodeSerializer(serializers.ModelSerializer):
         model = QRCode
         fields = ['original_url', 'qr_code_image']
         read_only_fields = ['qr_code_image']
+        
