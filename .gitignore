@@ -4,3 +4,13 @@ venv/
 # Ignore all .pyc files
 *.pyc
 *.pyc
+
+media/
+
+staticfiles/
+
+db.sqlite3/
+
+static/
+
+staticfiles_collected/

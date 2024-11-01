@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Generator</title>
-    <link rel="stylesheet" type="text/css" href="{% static '/css/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     <div class="container">
@@ -22,8 +22,8 @@
         {% if qr_code %}
         <div class="qr-result">
             <h2>Your QR Code:</h2>
-            <img src="{{ qr_code.url }}" alt="QR Code">
-            <a href="{{ qr_code.url }}" class="download-link" download="qr_code.png">Download QR Code</a>
+            <img src="{{ qr_code }}" alt="QR Code">
+            <a href="{{ qr_code }}" class="download-link" download="qr_code.png">Download QR Code</a>
         </div>
         {% endif %}
     </div>
