@@ -70,7 +70,33 @@ A full-featured QR Code generator built with Django and Django REST Framework. T
     python manage.py runserver
    ```
 
-7. t
+## API Usage
+
+Generate QR Code
+
+Endpoint: POST /api/qr/generate
+
+- Request Format:
+  
+    ```
+    {
+    "original_url": "https://example.com"
+    }
+    ```
+
+- Success Response
+  
+  ```
+  {
+    "code": 0,
+    "status": "success",
+    "message": "QR Code generated successfully",
+    "data": {
+        "original_url": "https://example.com",
+        "qr_code_image": "/media/qr_codes/qrcode_example.com.png"
+    }
+   }
+   ```
 
 ## Web Interface Usage
 
@@ -108,6 +134,69 @@ qr_code_generator/
 ├── manage.py
 ├── requirements.txt
 └── README.md
+```
+
+## Configuration
+
+Key settings in `settings.py`:
+
+```
+# Application setup
+INSTALLED_APPS = [
+    .......
+    'django.contrib.staticfiles',
+    'apps.generator',  
+    'rest_framework',
+]
+```
+
+```
+# Static Files Configuration
+STATIC_URL = '/staticfiles/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_collected')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'apps/generator/static'),
+]
+```
+
+```
+# Media Files Configuration
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+```
+
+```
+# Templates Configuration
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.static',
+            ],
+        },
+    },
+]
+```
+
+### Static and Media Files Setup
+
+Add to your main `urls.py`:
+
+```
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    # ... your url patterns ...
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
+  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 ```
 
 ## Development
